@@ -1,17 +1,17 @@
-const mongoose = require('mongoose')
-const { Schema } = mongoose
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const blogSchema = new Schema({
-  title: String,
-  content: String,
-  created: { 
-    type: Date, 
-    default: Date.now 
-  },
-  _user: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User' 
-  }
-})
+    title: String,
+    content: String,
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    _user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
+});
 
-mongoose.model('Blog', blogSchema)
+mongoose.model('Blog', blogSchema);

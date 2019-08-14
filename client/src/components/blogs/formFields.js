@@ -1,4 +1,1 @@
-export default [
-  { label: 'Blog Title', name: 'title' },
-  { label: 'Content', name: 'content' }
-]
+export default [{ label: 'Blog Title', name: 'title' }, { label: 'Content', name: 'content' }];
