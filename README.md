@@ -1,42 +1,79 @@
 # Advanced Node Production
 
-This repository is for exploring advanced node concepts for production deployment. This is a full-blown node blog application with authentication, react-client, and MongoDB.
+## `TIL`
 
-## Changelog
+### bluebird
 
-- **Make sure to setup your keys in a `.env` file in root**
-- **Make sure to run `yarn install` to install all dependencies**
-- Run scripts with:
-  - `yarn dev`
-  - `yarn build`
-  - `yarn start`
+-   A full featured promise library
+-   [npm](https://www.npmjs.com/package/bluebird)
 
-### Updates in server
+-   Install
 
-- Upgrade all dependencies to latest
-- Switch to using `yarn` instead of `npm`
-  - `package-json.lock` > `yarn.lock`
-- Required versions set in `package.json`:
-  - `yarn`: `^1.17.0`
-  - `node`: `^12.7.0`
-- Add support for `module-alias` to allow aliasing of modules in `require()`
-- Switch to `.env` files for managing keys
-  - Check `.env.placeholder` for setup
-- Remove semicolons in `.js`
-- Add `nodemon.json` for Nodemon settings
-  - Add ignore for changes in `client` (already handled by CRA)
-- `Blog` Schema
-  - `createdAt` > `created`
-- Some code cleanups
+```bash
+npm install --save bluebird
+```
 
-### Updates in `client`
+-   Usage
 
-- Upgrade all dependencies to latest
-- Switch to using `yarn` instead of `npm`
-  - `package-json.lock` > `yarn.lock`
-- Required versions set in `package.json`:
-  - `yarn`: `^1.17.0`
-  - `node`: `^12.7.0`
-- Add `jsconfig.json` to support module path alias directly starting from `src`
-- Remove semicolons in `.js`
-- Some code cleanups
+```javascript
+const Promise = require("bluebird");
+const fs = require("fs");
+Promise.promisifyAll(fs);
+fs.readFileAsync("file.js", "utf8").then(...)
+```
+
+### Redis
+
+-   [npm](https://www.npmjs.com/package/redis)
+
+-   Setup
+
+```javascript
+import redis from 'redis';
+
+const redisUrl = 'redis://127.0.0.1:6379';
+const client = redis.createClient(redisUrl);
+```
+
+-   `get()` & `set()`
+
+```javascript
+client.set('color', 'red');
+client.get('color', (err, val) => console.log(val)); // red
+client.get('color', console.log); // null 'red'
+
+client.set('color', 'red', 'EX', 5); // expires in 5 seconds
+```
+
+-   `hget()` & `hset()`
+
+```javascript
+client.hset('apple', 'iphone', '4s');
+client.hget('apple', 'iphone', console.log); // null '4s'
+```
+
+-   `del()`
+
+```javascript
+client.del('color');
+client.get('color', console.log); // null null
+```
+
+-   Usage
+
+```javascript
+import { promisify } from 'util';
+
+client.get = util.promisify(client.get);
+
+app.get('/blogs', async (req, res) => {
+    const cachedBlogs = await client.get(req.user.id);
+
+    if (cachedBlogs) {
+        return res.send(JSON.parse(cachedBlogs));
+    }
+
+    const blogs = await Blog.find({ _user: req.user.id });
+    res.send(blogs);
+});
+```
