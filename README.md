@@ -1,4 +1,4 @@
-# Advanced Node Production
+# Advanced Node
 
 ## `TIL`
 
@@ -14,6 +14,7 @@ npm install --save bluebird
 ```
 
 -   Usage
+    -   Automatically add 'Async'-suffix to method name
 
 ```javascript
 const Promise = require("bluebird");
@@ -24,12 +25,17 @@ fs.readFileAsync("file.js", "utf8").then(...)
 
 ### Redis
 
+-   In-memory data structure
 -   [npm](https://www.npmjs.com/package/redis)
 
 -   Setup
 
 ```javascript
+import * as Promise from 'bluebird';
 import redis from 'redis';
+
+Promise.promisifyAll(redis.RedisClient.prototype);
+Promise.promisifyAll(redis.Multi.prototype);
 
 const redisUrl = 'redis://127.0.0.1:6379';
 const client = redis.createClient(redisUrl);
@@ -62,12 +68,8 @@ client.get('color', console.log); // null null
 -   Usage
 
 ```javascript
-import { promisify } from 'util';
-
-client.get = util.promisify(client.get);
-
-app.get('/blogs', async (req, res) => {
-    const cachedBlogs = await client.get(req.user.id);
+router.get('/blogs', async (req, res) => {
+    const cachedBlogs = await client.getAsync(req.user.id);
 
     if (cachedBlogs) {
         return res.send(JSON.parse(cachedBlogs));
@@ -76,4 +78,16 @@ app.get('/blogs', async (req, res) => {
     const blogs = await Blog.find({ _user: req.user.id });
     res.send(blogs);
 });
+```
+
+### Async Middleware
+
+-   Execute something after next()
+
+```javascript
+const middleware = async (req, res, next) => {
+    await next();
+
+    doSomething();
+};
 ```
