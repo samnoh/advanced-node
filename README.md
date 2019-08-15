@@ -58,11 +58,12 @@ client.hset('apple', 'iphone', '4s');
 client.hget('apple', 'iphone', console.log); // null '4s'
 ```
 
--   `del()`
+-   `del()` & `flushAll()`
 
 ```javascript
 client.del('color');
 client.get('color', console.log); // null null
+client.flushAll(); // remove all caches
 ```
 
 -   Usage
@@ -82,7 +83,7 @@ router.get('/blogs', async (req, res) => {
 
 ### Async Middleware
 
--   Execute something after next()
+-   Execute something after `next()`
 
 ```javascript
 const middleware = async (req, res, next) => {
