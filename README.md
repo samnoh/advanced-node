@@ -87,10 +87,8 @@ router.post('/blogs', (req, res) => {
         content,
         _user: req.user.id
     });
-    try {
-        await blog.save();
-        res.send(blog);
-    } catch(e) { ... }
+
+    await blog.save();
 
     client.del(req.user.id); // remove caches for the user
 
