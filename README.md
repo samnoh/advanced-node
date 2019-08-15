@@ -82,11 +82,7 @@ router.get('/blogs', async (req, res) => {
 
 router.post('/blogs', (req, res) => {
     const { title, body } = req.body;
-    const blog = new Blog({
-        title,
-        content,
-        _user: req.user.id
-    });
+    const blog = new Blog({ ... });
 
     await blog.save();
 
