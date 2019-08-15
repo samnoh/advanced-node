@@ -70,7 +70,7 @@ client.flushAll(); // remove all caches
 
 ```javascript
 router.get('/blogs', async (req, res) => {
-    const cachedBlogs = await client.getAsync(req.user.id);
+    const cachedBlogs = await client.getAsync(req.user.id); // getAsync(); not get()
 
     if (cachedBlogs) {
         return res.send(JSON.parse(cachedBlogs));
@@ -78,6 +78,23 @@ router.get('/blogs', async (req, res) => {
 
     const blogs = await Blog.find({ _user: req.user.id });
     res.send(blogs);
+});
+
+router.post('/blogs', (req, res) => {
+    const { title, body } = req.body;
+    const blog = new Blog({
+        title,
+        content,
+        _user: req.user.id
+    });
+    try {
+        await blog.save();
+        res.send(blog);
+    } catch(e) { ... }
+
+    client.del(req.user.id); // remove caches for the user
+
+    res.redirect('/blogs');
 });
 ```
 
