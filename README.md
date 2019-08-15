@@ -58,12 +58,12 @@ client.hset('apple', 'iphone', '4s');
 client.hget('apple', 'iphone', console.log); // null '4s'
 ```
 
--   `del()` & `flushAll()`
+-   `del()` & `flushall()`
 
 ```javascript
 client.del('color');
 client.get('color', console.log); // null null
-client.flushAll(); // remove all caches
+client.flushall(); // remove all caches
 ```
 
 -   Usage
