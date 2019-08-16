@@ -104,10 +104,121 @@ const middleware = async (req, res, next) => {
 };
 ```
 
-### Jest + puppeteer
+### Jest
 
--   Install
+-   JavaScript Testing
+-   [Docs](https://jestjs.io/docs/en/getting-started://jestjs.io/)
+-   [Cheat Sheet](https://github.com/sapegin/jest-cheat-sheet/blob/master/Readme.md)
 
-```bash
-npm install --save-dev jest puppeteer
+-   `jest.config.js`
+
+```javascript
+module.exports = {
+    testEnvironment: 'node',
+    setupFilesAfterEnv: ['./tests/setup.js'] /* always execute those files before testing */
+};
 ```
+
+-   Test structure
+    -   `describe()` and `test()`
+    -   `beforeAll()`, `afterAll()`, `beforeEach()` and `afterEach()`
+
+```javascript
+describe('makePoniesPink', () => {
+    beforeAll(() => {
+        /* Runs before all tests */
+    });
+    afterAll(() => {
+        /* Runs after all tests */
+    });
+    beforeEach(() => {
+        /* Runs before each test */
+    });
+    afterEach(() => {
+        /* Runs after each test */
+    });
+
+    test('make each pony pink', () => {
+        const actual = fn(['Alice', 'Bob', 'Eve']);
+        expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve']);
+    });
+});
+```
+
+-   Usage
+
+```javascript
+test('object props', () => {
+    const data = { one: 1, two: 2 };
+    expect(data).toEqual({ one: 1, two: 2 });
+});
+
+test('the data is peanut butter', async () => {
+    const data = await fetchData();
+    expect(data).toBe('peanut butter');
+});
+
+test('mentions grapefruit', () => {
+    expect(essayOnTheBestFlavor()).toMatch(/grapefruit/);
+});
+```
+
+-   Skip other tests
+
+```javascript
+test.only('...', () => {
+    ...
+});
+```
+
+### Puppeteer
+
+-   Headless Chrome Node API
+-   [GitHub](https://github.com/GoogleChrome/puppeteer)
+
+-   Launch the headless Chromium
+
+```javascript
+browser = await puppeteer.launch({ headless: true });
+```
+
+-   Quit the app
+
+```javascript
+browser.close();
+```
+
+-   Create a new page (tab)
+
+```javascript
+page = await browser.newPage();
+```
+
+-   Goto the link
+
+```javascript
+page.goto('http://example.com');
+```
+
+-   Wait for loading the element
+
+```javascript
+page.waitFor('a.left');
+```
+
+-   Click button
+
+```javascript
+page.click('button.active');
+```
+
+-   Set cookies
+
+```javascript
+page.setCookie({
+    name: 'session',
+    value: '...'
+});
+```
+
+### Proxy
