@@ -103,3 +103,11 @@ const middleware = async (req, res, next) => {
     doSomething();
 };
 ```
+
+### Jest + puppeteer
+
+-   Install
+
+```bash
+npm install --save-dev jest puppeteer
+```
