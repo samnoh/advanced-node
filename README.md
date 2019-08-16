@@ -163,12 +163,18 @@ test('mentions grapefruit', () => {
 });
 ```
 
--   Skip other tests
+-   Skip these tests
 
 ```javascript
-test.only('...', () => {
-    ...
-});
+describe.skip('...', () => { .. });
+test.skip('...', () => { .. });
+```
+
+-   Run only these tests
+
+```javascript
+describe.only('...', () => { .. });
+test.only('...', () => { .. });
 ```
 
 ### Puppeteer
