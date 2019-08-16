@@ -25,7 +25,7 @@ const setupBlogRoutes = require('@routes/blogRoutes');
 // Server and DB Settings
 const PORT = process.env.PORT;
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoURI, { useNewUrlParser: true });
+mongoose.connect(mongoURI, { useNewUrlParser: true, dbName: 'advanced-node' });
 const app = express();
 
 // Server middleware
@@ -35,12 +35,13 @@ if (prod) {
     mongoose.set('debug', true);
     app.use(morgan('tiny'));
 }
+
 app.use(bodyParser.json());
 app.use(
     cookieSession({
-        maxAge: 30 * 24 * 60 * 60 * 1000,
+        maxAge: 14 * 24 * 60 * 60 * 1000,
         keys: [cookieKey],
-        secret: prod
+        secure: prod
     })
 );
 app.use(passport.initialize());
