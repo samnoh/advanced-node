@@ -124,7 +124,7 @@ module.exports = {
     -   `beforeAll()`, `afterAll()`, `beforeEach()` and `afterEach()`
 
 ```javascript
-describe('makePoniesPink', () => {
+describe('...', () => {
     beforeAll(() => {
         /* Runs before all tests */
     });
@@ -138,10 +138,7 @@ describe('makePoniesPink', () => {
         /* Runs after each test */
     });
 
-    test('make each pony pink', () => {
-        const actual = fn(['Alice', 'Bob', 'Eve']);
-        expect(actual).toEqual(['Pink Alice', 'Pink Bob', 'Pink Eve']);
-    });
+    test('...', () => { ... });
 });
 ```
 
@@ -153,13 +150,13 @@ test('object props', () => {
     expect(data).toEqual({ one: 1, two: 2 });
 });
 
-test('the data is peanut butter', async () => {
+test('the data is abc', async () => {
     const data = await fetchData();
-    expect(data).toBe('peanut butter');
+    expect(data).toBe('abc');
 });
 
-test('mentions grapefruit', () => {
-    expect(essayOnTheBestFlavor()).toMatch(/grapefruit/);
+test('mentions google', () => {
+    expect(getBestWebsites()).toMatch(/google/);
 });
 ```
 
@@ -221,10 +218,7 @@ page.click('button.active');
 -   Set cookies
 
 ```javascript
-page.setCookie({
-    name: 'session',
-    value: '...'
-});
+page.setCookie({ name: 'session', value: '...' });
 ```
 
 ### Proxy
