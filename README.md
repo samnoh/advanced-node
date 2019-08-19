@@ -261,3 +261,5 @@ const car = CustomCar.build();
 car.goTo();
 car.stop();
 ```
+
+### Travis CI
