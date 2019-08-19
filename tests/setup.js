@@ -1,3 +1,5 @@
+jest.setTimeout(30000); // 30 seconds
+
 const mongoose = require('mongoose');
 
 const { mongoURI } = require('../config/keys');

@@ -215,6 +215,12 @@ page.waitFor('a.left');
 page.click('button.active');
 ```
 
+-   Get HTML contents
+
+```javascript
+page.$eval('selector', el => el.innerHTML);
+```
+
 -   Set cookies
 
 ```javascript
