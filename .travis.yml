@@ -3,8 +3,6 @@ node_js:
     - 12
 dist: trusty
 sudo: required
-addons:
-    chrome: stable
 services:
     - mongodb
     - redis-server
