@@ -222,3 +222,36 @@ page.setCookie({ name: 'session', value: '...' });
 ```
 
 ### Proxy
+
+-   ES6
+-   Define custom behavior for fundamental operations
+-   Wrapper object
+
+```javascript
+class Car {
+    goTo() {
+        console.log('vrrr');
+    }
+}
+
+class CustomCar {
+    static build() {
+        const car = new Car();
+        const customCar = new CustomCar();
+
+        return new Proxy(customCar, {
+            get: function(target, handler) {
+                return target[handler] || car[handler];
+            }
+        });
+    }
+
+    stop() {
+        console.log('stop!');
+    }
+}
+
+const car = CustomCar.build();
+car.goTo();
+car.stop();
+```
