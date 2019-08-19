@@ -22,7 +22,7 @@ const setupBlogRoutes = require('@routes/blogRoutes');
 
 // Server and DB Settings
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoURI, { useNewUrlParser: true });
+mongoose.connect(mongoURI, { useNewUrlParser: true, dbName: 'advanced-node' });
 const app = express();
 
 // Server middleware
