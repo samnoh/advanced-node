@@ -62,3 +62,16 @@ describe('When logged in', () => {
         });
     });
 });
+
+describe('When User is not logged in', () => {
+    test('cannot create blog pots', async () => {
+        const result = await page.post('/api/blogs', { title: 'My Title', content: 'My Content' });
+        expect(result).toEqual({ error: 'Login required' });
+    });
+
+    test('cannot get a list of posts', async () => {
+        const result = await page.get('/api/blogs');
+
+        expect(result).toEqual({ error: 'Login required' });
+    });
+});
