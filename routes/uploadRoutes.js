@@ -4,7 +4,12 @@ const uuid = require('uuid/v4');
 const authenticate = require('@middleware/authenticate');
 const { accessKeyId, secretAccessKey } = require('@config/keys');
 
-const s3 = new AWS.S3({ accessKeyId, secretAccessKey });
+const s3 = new AWS.S3({
+    accessKeyId,
+    secretAccessKey,
+    signatureVersion: 'v4',
+    region: 'ap-southeast-2'
+});
 
 module.exports = app => {
     app.get('/api/upload', authenticate, (req, res) => {
@@ -15,7 +20,7 @@ module.exports = app => {
             {
                 Bucket: 'my-blog-bucket-demo-123',
                 Key: key,
-                ContentType: 'jpeg'
+                ContentType: 'image/jpeg'
             },
             (err, url) => res.send({ key, url })
         );
