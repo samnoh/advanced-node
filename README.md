@@ -291,3 +291,39 @@ install:
     - nohup npm start &
     - sleep 5
 ```
+
+### AWS-SDK for JS
+
+-   Install
+
+```bash
+npm install --save aws-sdk
+```
+
+-   S3 Setup
+
+```javascript
+const AWS = require('aws-sdk');
+const { accessKeyId, secretAccessKey } = require('@config/keys');
+
+const s3 = new AWS.S3({
+    accessKeyId,
+    secretAccessKey,
+    signatureVersion: 'v4',
+    region: 'ap-southeast-2'
+});
+```
+
+-   Put Image
+
+```javascript
+s3.getSignedUrl(
+    'putObject',
+    {
+        Bucket: 'my-blog-bucket-demo-123',
+        Key: key,
+        ContentType: 'image/jpeg'
+    },
+    (err, url) => res.send({ key, url })
+);
+```
