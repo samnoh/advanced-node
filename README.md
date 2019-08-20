@@ -263,3 +263,27 @@ car.stop();
 ```
 
 ### Travis CI
+
+-   [Travis CI](https://travis-ci.com/)
+
+-   `.travis.yml`
+
+```yaml
+language: node_js
+node_js:
+    - 12
+dist: trusty
+services:
+    - mongodb
+    - redis-server
+env:
+    - NODE_ENV=ci PORT=3000
+cache:
+    directories:
+        - node_modules
+install:
+    - npm install
+    - npm run build
+    - nohup npm start &
+    - sleep 5
+```

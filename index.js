@@ -28,7 +28,7 @@ const app = express();
 // Server middleware
 if (prod) {
     app.use(morgan('combined'));
-} else {
+} else if (!ci) {
     mongoose.set('debug', true);
     app.use(morgan('tiny'));
 }
