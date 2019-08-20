@@ -18,6 +18,7 @@ class BlogShow extends Component {
                     src={`https://my-blog-bucket-demo-123.s3-ap-southeast-2.amazonaws.com/${
                         blog.imageUrl
                     }`}
+                    alt="Blog"
                 />
             );
         }

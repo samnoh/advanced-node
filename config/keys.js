@@ -7,7 +7,7 @@
 
 module.exports = {
     prod: process.env.NODE_ENV === 'production',
-    ci: process.env.NODE_ENV === 'ci',
+    ci: process.env.CI,
     port: process.env.PORT || 5000,
     cookieKey: process.env.COOKIE_KEY,
     googleClientID: process.env.GOOGLE_CLIENT_ID,
