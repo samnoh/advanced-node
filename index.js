@@ -19,6 +19,7 @@ require('@services/cache');
 // Routes
 const setupAuthRoutes = require('@routes/authRoutes');
 const setupBlogRoutes = require('@routes/blogRoutes');
+const setupUploadRoutes = require('@routes/uploadRoutes');
 
 // Server and DB Settings
 mongoose.Promise = global.Promise;
@@ -47,6 +48,7 @@ app.use(passport.session());
 // Server Routes
 setupAuthRoutes(app);
 setupBlogRoutes(app);
+setupUploadRoutes(app);
 
 if (prod || ci) {
     app.use(express.static('client/build'));

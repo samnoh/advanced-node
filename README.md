@@ -267,6 +267,10 @@ car.stop();
 -   [Travis CI](https://travis-ci.com/)
 
 -   `.travis.yml`
+    -   `language`
+    -   `services`
+    -   `env`
+    -   `install`
 
 ```yaml
 language: node_js

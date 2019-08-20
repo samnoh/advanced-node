@@ -8,10 +8,12 @@
 module.exports = {
     prod: process.env.NODE_ENV === 'production',
     ci: process.env.NODE_ENV === 'ci',
+    port: process.env.PORT || 5000,
+    cookieKey: process.env.COOKIE_KEY,
     googleClientID: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     mongoURI: process.env.MONGODB_URI,
-    cookieKey: process.env.COOKIE_KEY,
     redisUrl: process.env.REDIS_URL,
-    port: process.env.PORT || 5000
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY
 };
